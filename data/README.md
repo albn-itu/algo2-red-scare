@@ -14,6 +14,9 @@ The integer `n` is the number of vertices.
 The integer `m` is the number of edges.
 The integer `r` is the cardinality of *R*.
 
+`s` is the start
+`t` is the source
+
 `<vertices>` is a list of vertex names, one per line. Each vertex name is a string from `[_a-z0-9]+`.
 The names of vertices in R are followed by “` *`”.
 
