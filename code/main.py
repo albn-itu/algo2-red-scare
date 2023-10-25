@@ -23,6 +23,5 @@ def alternate():
 
 
 if __name__ == '__main__':
-    parsing.open_and_parse('../data/G-ex.txt')
-
+    # TODO: Parsing
     # TODO: Run the methods here:
