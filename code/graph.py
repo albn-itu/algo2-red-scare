@@ -6,6 +6,8 @@ class Node():
     def __str__(self):
         return f"Node({self.name}, {self.is_red})"
 
+    # TODO: Implement hash and equality. This may be needed for the graph later
+
 
 class Graph():
     def __init__(self, start, target):
