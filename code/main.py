@@ -30,7 +30,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # TODO: Hail mary argument that just runs all the files
-    # TODO: Parsing
     # TODO: Run the methods here:
     graph = parsing.open_and_parse(args.file)
     print(graph)
