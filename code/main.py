@@ -1,12 +1,20 @@
 import parsing
 from argparse import ArgumentParser
-from algorithms import alternating_bfs
+from algorithms import alternating_bfs, BFS_ignoring_red_vertices
 from utils import print_dict
 from copy import deepcopy
 
 
-def none():
-    pass
+def none(g):
+    parent = BFS_ignoring_red_vertices(g)
+    len = 0
+    current = g.target
+    while current in parent:
+        current = parent[current]
+        len += 1
+        if current == g.start:
+            return len
+    return -1
 
 
 def some():
@@ -29,6 +37,11 @@ def alternate(graph):
         return 'false'
 
 
+def print_dict(d):
+    for k, v in d.items():
+        print(str(k), "->", str(v))
+
+
 if __name__ == '__main__':
     parser = ArgumentParser(description='Red scare')
     parser.add_argument('-f', '--file', default='../data/G-ex.txt',
@@ -41,3 +54,5 @@ if __name__ == '__main__':
     print(graph)
 
     print("alternate", alternate(deepcopy(graph)))
+    print(none(graph))
+
