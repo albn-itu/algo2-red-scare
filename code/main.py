@@ -1,19 +1,13 @@
 import parsing
 from argparse import ArgumentParser
-from algorithms import alternating_bfs, BFS_ignoring_red_vertices
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs
 from copy import deepcopy
+from utils import get_path_length, print_dict
 
 
 def none(graph):
-    parent = BFS_ignoring_red_vertices(graph)
-    len = 0
-    current = graph.target
-    while current in parent:
-        current = parent[current]
-        len += 1
-        if current == graph.start:
-            return len
-    return -1
+    parent = ignoring_red_vertices_bfs(graph)
+    return get_path_length(graph, parent)
 
 
 def some():
@@ -29,8 +23,9 @@ def many():
 
 
 def alternate(graph):
-    alternate_res = alternating_bfs(graph)
-    if graph.target in alternate_res and alternate_res[graph.target] != 0:
+    parent = alternating_bfs(graph)
+    length = get_path_length(graph, parent)
+    if length != -1:
         return 'true'
     else:
         return 'false'
@@ -48,4 +43,3 @@ if __name__ == '__main__':
 
     print("alternate", alternate(deepcopy(graph)))
     print("none", none(deepcopy(graph)))
-    print(graph.contains_cycle())
