@@ -1,18 +1,21 @@
 import parsing
 from argparse import ArgumentParser
-import algorithms
+from algorithms import alternating_bfs, BFS_ignoring_red_vertices
+from utils import print_dict
+from copy import deepcopy
 
 
 def none(g):
-    parent = algorithms.BFS_ignoring_red_vertices(g)
+    parent = BFS_ignoring_red_vertices(g)
     len = 0
     current = g.target
-    while current in parent :
+    while current in parent:
         current = parent[current]
-        len+=1
-        if current == g.start :
+        len += 1
+        if current == g.start:
             return len
     return -1
+
 
 def some():
     pass
@@ -26,12 +29,18 @@ def many():
     pass
 
 
-def alternate():
-    pass
+def alternate(graph):
+    alternate_res = alternating_bfs(graph)
+    if graph.target in alternate_res and alternate_res[graph.target] != 0:
+        return 'true'
+    else:
+        return 'false'
 
-def print_dict(d) :
-    for k,v in d.items() :
+
+def print_dict(d):
+    for k, v in d.items():
         print(str(k), "->", str(v))
+
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Red scare')
@@ -43,4 +52,7 @@ if __name__ == '__main__':
     # TODO: Run the methods here:
     graph = parsing.open_and_parse(args.file)
     print(graph)
+
+    print("alternate", alternate(deepcopy(graph)))
     print(none(graph))
+
