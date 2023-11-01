@@ -1,4 +1,4 @@
-from collections import defaultdict, deque
+from collections import deque
 
 
 class Node():
@@ -23,11 +23,8 @@ class Graph():
     def get_node(self, name):
         return self.nodes[name]
 
-    def neighbors(self, node):
+    def neighbours(self, node):
         return self.edges[node]
-
-    def get_edges(self, name):
-        return self.edges[self.get_node(name)]
 
     def add_node(self, node):
         self.nodes[node.name] = node
@@ -43,18 +40,17 @@ class Graph():
             self.edges[node2].append(node1)
 
     def contains_cycle(self):
-        visited = {k: False for k in self.nodes}
-        recursion = {k: False for k in self.nodes}
+        visited = {k: False for k in self.nodes.values()}
+        recursion = {k: False for k in self.nodes.values()}
 
-        for vertex, n in self.nodes.items():
-            if visited[vertex] == False:
-                if self.__isCyclic(vertex, visited, recursion) == True:
+        for n in self.nodes.values():
+            if not visited[n]:
+                if self.__isCyclic(n, visited, recursion):
                     return True
 
         return False
 
-    def __isCyclic(self, start_vertex: str, visited, recursion):
-
+    def __isCyclic(self, start_vertex: Node, visited, recursion):
         # Create stack and add adjacent vertices of vertice
         stack = deque()
         stack.append((start_vertex, False))
@@ -66,14 +62,14 @@ class Graph():
                 recursion[current_vertex] = False
             else:
 
-                if visited[current_vertex] == False:
+                if not visited[current_vertex]:
                     visited[current_vertex] = True
                     recursion[current_vertex] = True
                     stack.append((current_vertex, True))
 
-                    for adjacent_node in self.get_edges(current_vertex):
-                        stack.append((adjacent_node.name, False))
-                elif recursion[current_vertex] == True:
+                    for adjacent_node in self.neighbours(current_vertex):
+                        stack.append((adjacent_node, False))
+                elif recursion[current_vertex]:
                     return True
 
         recursion[start_vertex] = False
