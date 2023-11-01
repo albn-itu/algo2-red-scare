@@ -1,6 +1,8 @@
 import parsing
 from argparse import ArgumentParser
-import algorithms
+from algorithms import alternating_bfs
+from utils import print_dict
+from copy import deepcopy
 
 
 def none():
@@ -19,8 +21,12 @@ def many():
     pass
 
 
-def alternate():
-    pass
+def alternate(graph):
+    alternate_res = alternating_bfs(graph)
+    if graph.target in alternate_res and alternate_res[graph.target] != 0:
+        return 'true'
+    else:
+        return 'false'
 
 
 if __name__ == '__main__':
@@ -33,3 +39,5 @@ if __name__ == '__main__':
     # TODO: Run the methods here:
     graph = parsing.open_and_parse(args.file)
     print(graph)
+
+    print("alternate", alternate(deepcopy(graph)))
