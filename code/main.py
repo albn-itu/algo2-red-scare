@@ -35,7 +35,7 @@ def print_dict(d) :
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Red scare')
-    parser.add_argument('-f', '--file', default='../data/P3.txt',
+    parser.add_argument('-f', '--file', default='../data/G-ex.txt',
                         required=False, help='The file to be parsed')
     args = parser.parse_args()
 
