@@ -26,7 +26,12 @@ def open_and_parse(filename):
             is_red = True
             offset += 1
 
-        graph.add_node(Node(name, is_red))
+        node = Node(name, is_red)
+        graph.add_node(node)
+        if name == s:
+            graph.start = node
+        elif name == t:
+            graph.target = node
 
     rest = rest[n+offset:]
 
