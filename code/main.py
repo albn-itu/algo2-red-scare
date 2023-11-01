@@ -1,18 +1,17 @@
 import parsing
 from argparse import ArgumentParser
 from algorithms import alternating_bfs, BFS_ignoring_red_vertices
-from utils import print_dict
 from copy import deepcopy
 
 
-def none(g):
-    parent = BFS_ignoring_red_vertices(g)
+def none(graph):
+    parent = BFS_ignoring_red_vertices(graph)
     len = 0
-    current = g.target
+    current = graph.target
     while current in parent:
         current = parent[current]
         len += 1
-        if current == g.start:
+        if current == graph.start:
             return len
     return -1
 
@@ -37,11 +36,6 @@ def alternate(graph):
         return 'false'
 
 
-def print_dict(d):
-    for k, v in d.items():
-        print(str(k), "->", str(v))
-
-
 if __name__ == '__main__':
     parser = ArgumentParser(description='Red scare')
     parser.add_argument('-f', '--file', default='../data/G-ex.txt',
@@ -51,8 +45,7 @@ if __name__ == '__main__':
     # TODO: Hail mary argument that just runs all the files
     # TODO: Run the methods here:
     graph = parsing.open_and_parse(args.file)
-    print(graph)
 
     print("alternate", alternate(deepcopy(graph)))
-    print(none(graph))
-
+    print("none", none(deepcopy(graph)))
+    print(graph.contains_cycle())
