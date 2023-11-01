@@ -27,9 +27,12 @@ class Graph():
         self.edges[node] = []
 
     def add_edge(self, node1, node2, directed=False):
+        """
+        Adds edge between the two nodes. If it is not directed then a reverse edge is being added as well
+        """
         self.edges[node1].append(node2)
 
-        if directed:
+        if not directed:
             self.edges[node2].append(node1)
 
     def contains_cycle(self):
