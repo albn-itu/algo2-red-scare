@@ -13,7 +13,7 @@ def alternating_bfs(graph):
         is_red = not is_red
         path[node] = min(path.get(node, float('inf')), step)
 
-        for j in graph.neighbors(node):
+        for j in graph.neighbours(node):
             if j.is_red == is_red and (j, is_red) not in visited:
                 visited.add((j, is_red))
                 queue.append((j, is_red, step + 1))

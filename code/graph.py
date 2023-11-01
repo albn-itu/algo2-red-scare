@@ -23,7 +23,7 @@ class Graph():
     def get_node(self, name):
         return self.nodes[name]
 
-    def neighbors(self, node):
+    def neighbours(self, node):
         return self.edges[node]
 
     def add_node(self, node):
@@ -67,7 +67,7 @@ class Graph():
                     recursion[current_vertex] = True
                     stack.append((current_vertex, True))
 
-                    for adjacent_node in self.neighbors(current_vertex):
+                    for adjacent_node in self.neighbours(current_vertex):
                         stack.append((adjacent_node, False))
                 elif recursion[current_vertex]:
                     return True
