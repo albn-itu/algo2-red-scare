@@ -1,4 +1,5 @@
 import parsing
+from argparse import ArgumentParser
 import algorithms
 
 
@@ -23,5 +24,12 @@ def alternate():
 
 
 if __name__ == '__main__':
-    # TODO: Parsing
+    parser = ArgumentParser(description='Red scare')
+    parser.add_argument('-f', '--file', default='../data/G-ex.txt',
+                        required=False, help='The file to be parsed')
+    args = parser.parse_args()
+
+    # TODO: Hail mary argument that just runs all the files
     # TODO: Run the methods here:
+    graph = parsing.open_and_parse(args.file)
+    print(graph)
