@@ -20,6 +20,9 @@ class Graph():
     def get_node(self, name):
         return self.nodes[name]
 
+    def neighbors(self, node):
+        return self.edges[node]
+
     def add_node(self, node):
         self.nodes[node.name] = node
         self.edges[node] = []
