@@ -6,9 +6,7 @@ def read(filename):
         return f.read().split()
 
 
-def open_and_parse(filename):
-    data = read(filename)
-
+def parse(data):
     n, m, r, s, t, *rest = data
     n = int(n)
     m = int(m)
@@ -45,3 +43,8 @@ def open_and_parse(filename):
         graph.add_edge(node1, node2, directed)
 
     return graph
+
+
+def open_and_parse(filename):
+    data = read(filename)
+    return parse(data)
