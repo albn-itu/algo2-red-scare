@@ -127,3 +127,42 @@ def shortest_chain(g, sorted_nodes):
                         min_dist = dist[neighbor]
 
     return -1 if min_dist >= sys.maxsize else min_dist
+
+def DFS_find_all_paths(graph):
+    def dfs(graph: Graph, start: Node):
+        """
+        Performs depth first search on a graph 
+        """
+
+        stack = []
+        visited = []
+        redCount = 0
+
+        stack.append((start, False))
+
+        while len(stack):
+            current, is_back = stack.pop()
+
+            if is_back:
+                visited.pop()
+                if current.is_red:
+                    redCount -= 1
+                continue
+            elif (current == graph.target): 
+                if (redCount > 0 or current.is_red):
+                    return True
+                else:
+                    continue
+                
+            visited.append(current)
+            stack.append((current, True)) # Add trace back
+            if current.is_red:
+                redCount += 1
+
+            for neighbor in graph.edges[current]:
+                if neighbor not in visited:
+                    stack.append((neighbor, False))
+
+        return False
+    
+    return dfs(graph, graph.start)
