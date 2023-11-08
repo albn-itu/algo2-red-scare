@@ -13,9 +13,9 @@ def none(graph):
 def some():
     ans = many()
 
-    if (ans == -1 or ans == 0) :
+    if (ans == -1 or ans == 0):
         return False
-    else :
+    else:
         return True
 
 def few():
