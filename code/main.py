@@ -1,6 +1,6 @@
 import parsing
 from argparse import ArgumentParser
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain
 from copy import deepcopy
 from utils import get_path_length, print_dict
 
@@ -19,7 +19,10 @@ def few():
 
 
 def many(g):
-    algorithms.topological_sort(g)
+    sorted_nodes = topological_sort(g)
+    path = longest_chain(g, sorted_nodes)
+
+    return path
 
 
 def alternate(graph):
@@ -33,7 +36,7 @@ def alternate(graph):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Red scare')
-    parser.add_argument('-f', '--file', default='../data/G-ex.txt',
+    parser.add_argument('-f', '--file', default='data/G-ex.txt',
                         required=False, help='The file to be parsed')
     args = parser.parse_args()
 
@@ -41,5 +44,9 @@ if __name__ == '__main__':
     # TODO: Run the methods here:
     graph = parsing.open_and_parse(args.file)
 
-    print("alternate", alternate(deepcopy(graph)))
-    print("none", none(deepcopy(graph)))
+    if graph.is_directed and not graph.contains_cycle:
+        n_red = many(graph)
+        print(n_red)
+    else:
+        print("?!") # Not possible to run many with topological sort when graph has a cycle
+
