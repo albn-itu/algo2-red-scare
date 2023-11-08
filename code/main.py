@@ -22,7 +22,7 @@ def some(graph):
 
 def few(graph):
     # Not possible to run many with topological sort when graph has a cycle
-    if graph.is_directed and not graph.contains_cycle:
+    if graph.is_directed() and not graph.contains_cycle():
         sorted_nodes = topological_sort(graph)
         path = shortest_chain(graph, sorted_nodes)
 
@@ -33,7 +33,7 @@ def few(graph):
 
 def many(graph):
     # Not possible to run many with topological sort when graph has a cycle
-    if graph.is_directed and not graph.contains_cycle:
+    if graph.is_directed() and not graph.contains_cycle():
         sorted_nodes = topological_sort(graph)
         path = longest_chain(graph, sorted_nodes)
 
