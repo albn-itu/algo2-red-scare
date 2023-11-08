@@ -1,7 +1,7 @@
 import os
 import parsing
 from argparse import ArgumentParser
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain, DFS_find_all_paths
 from copy import deepcopy
 from utils import get_path_length, val_or_na, write_results
 
@@ -14,10 +14,13 @@ def none(graph):
 def some(graph):
     ans = many(graph)
 
-    if (ans == -1 or ans == 0):
+    if (ans > 0):
+        return True
+    elif (ans == 0):
         return False
     else:
-        return True
+        return DFS_find_all_paths(graph)
+        
 
 
 def few(graph):
