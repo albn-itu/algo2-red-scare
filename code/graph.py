@@ -13,13 +13,23 @@ class Node():
 
 
 class Graph():
-    def __init__(self, start, target):
+    def __init__(self, n, start, target):
+        self.name = "unnamed"
+        self.n = n
+
         self.nodes = dict()  # string -> Node
         self.edges = dict()  # Node -> Node[]
 
         self.start = start
         self.target = target
         self.directed = True
+
+    def set_name(self, name):
+        if name.endswith(".txt"):
+            import os
+            name = os.path.splitext(os.path.basename(name))[0]
+
+        self.name = name
 
     def get_node(self, name):
         return self.nodes[name]

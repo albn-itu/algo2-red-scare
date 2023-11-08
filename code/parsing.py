@@ -12,7 +12,7 @@ def parse(data):
     m = int(m)
     r = int(r)
 
-    graph = Graph(s, t)
+    graph = Graph(n, s, t)
 
     offset = 0
     for i in range(n):
@@ -47,4 +47,6 @@ def parse(data):
 
 def open_and_parse(filename):
     data = read(filename)
-    return parse(data)
+    graph = parse(data)
+    graph.set_name(filename)
+    return graph
