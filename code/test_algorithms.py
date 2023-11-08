@@ -1,7 +1,7 @@
 import pytest
 from parsing import open_and_parse, parse
 from utils import get_path_length
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain
 
 
 @pytest.mark.parametrize("test_file,expected_length", [
@@ -66,3 +66,21 @@ def test_longest_chain():
     max_red_path = longest_chain(graph, sorted_nodes)
 
     assert max_red_path == 3
+
+def test_shortest_chain():
+
+    data = [
+        "5", "5", "3", "1", "5",  # n,m,r,s,t
+        "1", "*", "2", "*", "3", "4", "*", "5",  # vertex
+        "1", "->", "2",  # edge
+        "1", "->", "3",  # edge
+        "2", "->", "4",  # edge
+        "3", "->", "5",  # edge
+        "4", "->", "5",  # edge
+    ]
+
+    graph = parse(data)
+    sorted_nodes = topological_sort(graph)
+    min_red_path = shortest_chain(graph, sorted_nodes)
+
+    assert min_red_path == 1

@@ -1,6 +1,7 @@
 # TODO: Write your algorithm code here. Such as BFS, DFS, A*, Ford-Fulkerson, etc.
 from graph import Graph, Node
 from collections import deque, defaultdict
+import sys
 
 
 def alternating_bfs(graph):
@@ -106,3 +107,23 @@ def longest_chain(g, sorted_nodes):
                         max_dist = dist[neighbor]
 
     return max_dist
+
+def shortest_chain(g, sorted_nodes):
+    dist = defaultdict(lambda: -1)
+    dist[sorted_nodes[-1]] = 0
+    min_dist = sys.maxsize
+
+    while sorted_nodes:
+        node = sorted_nodes.pop()
+
+        a = 1 if node.is_red else 0
+
+        if dist[node] != -1:
+            for neighbor in g.edges[node]:
+                if dist[neighbor] < dist[node] + a:
+                    dist[neighbor] = dist[node] + a
+
+                    if dist[neighbor] < min_dist:
+                        min_dist = dist[neighbor]
+
+    return min_dist
