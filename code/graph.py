@@ -19,6 +19,7 @@ class Graph():
 
         self.start = start
         self.target = target
+        self.directed = True
 
     def get_node(self, name):
         return self.nodes[name]
@@ -37,7 +38,11 @@ class Graph():
         self.edges[node1].append(node2)
 
         if not directed:
+            self.directed = False
             self.edges[node2].append(node1)
+
+    def is_directed(self):
+        return self.directed
 
     def contains_cycle(self):
         visited = {k: False for k in self.nodes.values()}
