@@ -22,8 +22,8 @@ def few():
     pass
 
 
-def many():
-    pass
+def many(g):
+    algorithms.topological_sort(g)
 
 
 def alternate():
