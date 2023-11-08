@@ -148,7 +148,7 @@ def DFS_find_all_paths(graph):
                 if current.is_red:
                     redCount -= 1
                 continue
-            elif (current == graph.end): 
+            elif (current == graph.target): 
                 if (redCount > 0 or current.is_red):
                     return True
                 else:
@@ -162,7 +162,7 @@ def DFS_find_all_paths(graph):
             for neighbor in graph.edges[current]:
                 if neighbor not in visited:
                     stack.append((neighbor, False))
-                    
+
         return False
     
     return dfs(graph, graph.start)

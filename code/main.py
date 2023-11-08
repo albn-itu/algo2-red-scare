@@ -83,7 +83,7 @@ def gather_results():
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Red scare')
-    parser.add_argument('-f', '--file', default='../data/G-ex.txt',
+    parser.add_argument('-f', '--file', default='data/G-ex.txt',
                         required=False, help='The file to be parsed')
     parser.add_argument('-a', '--all', action='store_true',)
     args = parser.parse_args()
