@@ -1,5 +1,6 @@
 # TODO: Write your algorithm code here. Such as BFS, DFS, A*, Ford-Fulkerson, etc.
-from collections import deque
+from graph import Graph, Node
+from collections import deque, defaultdict
 
 
 def alternating_bfs(graph):
@@ -44,3 +45,64 @@ def bfs_general(
                 queue.append(to_queue_element(queue_element, e))
 
     return parent
+
+def topological_sort(graph: Graph):
+    """
+    Sorts the graph in a topological order
+
+    Returns: a list with the nodes in topological order
+    """
+
+    def dfs(graph: Graph, start: Node, visited, sorted_nodes):
+        """
+        Performs depth first search on a graph 
+        """
+
+        stack = []
+
+        stack.append((start, False))
+
+        while len(stack):
+            current, is_back = stack.pop()
+
+            if is_back:
+                sorted_nodes.append(current)
+                continue
+
+            visited.add(current)
+            stack.append((current, True)) # Add trace back
+
+            for neighbor in graph.edges[current]:
+                if neighbor not in visited:
+                    stack.append((neighbor, False))
+
+    visited = set()
+    sorted_nodes = []
+
+    dfs(graph, graph.start, visited, sorted_nodes)
+
+    for node in graph.edges:
+        if node not in visited:
+            dfs(graph, node, visited, sorted_nodes)
+
+    return sorted_nodes
+
+def longest_chain(g, sorted_nodes):
+    dist = defaultdict(lambda: -1)
+    dist[sorted_nodes[-1]] = 0
+    max_dist = -1
+
+    while sorted_nodes:
+        node = sorted_nodes.pop()
+
+        a = 1 if node.is_red else 0
+
+        if dist[node] != -1:
+            for neighbor in g.edges[node]:
+                if dist[neighbor] < dist[node] + a:
+                    dist[neighbor] = dist[node] + a
+
+                    if dist[neighbor] > max_dist:
+                        max_dist = dist[neighbor]
+
+    return max_dist
