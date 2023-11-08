@@ -1,7 +1,7 @@
 import os
 import parsing
 from argparse import ArgumentParser
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain
 from copy import deepcopy
 from utils import get_path_length, val_or_na, write_results
 
@@ -12,15 +12,34 @@ def none(graph):
 
 
 def some(graph):
-    pass
+    ans = many(graph)
+
+    if (ans == -1 or ans == 0):
+        return False
+    else:
+        return True
 
 
 def few(graph):
-    pass
+    # Not possible to run many with topological sort when graph has a cycle
+    if graph.is_directed and not graph.contains_cycle:
+        sorted_nodes = topological_sort(graph)
+        path = shortest_chain(graph, sorted_nodes)
+
+        return path
+    else:
+        return -1
 
 
 def many(graph):
-    pass
+    # Not possible to run many with topological sort when graph has a cycle
+    if graph.is_directed and not graph.contains_cycle:
+        sorted_nodes = topological_sort(graph)
+        path = longest_chain(graph, sorted_nodes)
+
+        return path
+    else:
+        return -1
 
 
 def alternate(graph):
