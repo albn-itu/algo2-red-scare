@@ -9,11 +9,11 @@
 \begin{document}
 \section{Red Scare! Report}
 
-by Alice Cooper.
+by Andreas Tietgen (anti), Albert Rise Nielsen (albn) and Amalie Bøgild Sørensen (abso).
 
 \subsection{Results}
 
-The following table gives my results for all graphs of at least 500 vertices.
+The following table gives our results for all graphs of at least 500 vertices.
 
 \medskip
 \begin{tabular}{lrrrrrr}
@@ -28,8 +28,8 @@ The following table gives my results for all graphs of at least 500 vertices.
 \medskip
 
 The columns are for the problems Alternate, Few, Many, None, and Some.
-The table entries either give the answer, or contain `?' for those cases where I was unable to find a solution within reasonable time.
-For those questions where there is a reason for my inability to find a good algorithm (because the problem is hard), I wrote `?!'.
+The table entries either give the answer, or contain `?' for those cases where we were unable to find a solution within reasonable time.
+For those questions where there is a reason for our inability to find a good algorithm (because the problem is hard), we wrote `?!'.
 
 For the complete table of all results, see the tab-separated text file {\tt results.txt}.
 
@@ -49,6 +49,18 @@ To see this, consider the following reduction from $\cdots$.
 Let $\ldots$ 
 
 I was also unable to solve $\cdots$ for $\cdots$, but I don’t know why.\footnote{Remove or expand as necessary.}
+
+For problem F...
+
+For problem M...
+
+For problem N, we solved it by doing a BFS while avoiding to queue any red vertices unless it is the target node. BFS is guaranteed
+to find th shortest path which is what we are trying to achieve here.
+The runtime of BFS is O(V*E) where V are the number of vertices and E is the number of Edges.
+
+For problem S, we used the answer from problem M. Since problem M returns the maximum number of red nodes on a path from s to t we know that if this is > 0, we have
+to return True and otherwise False for problem S. Thus, the Some problem reduces to the Many problem.
+For that reason the runtime is the same as for problem M. 
 
 \subsection{References}
 \begin{description}
