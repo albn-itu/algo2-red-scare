@@ -52,5 +52,8 @@ def write_tex_results(results):
 
 def write_results(results):
     create_output_folder()
+
+    results = sorted(results, key=lambda x: x[0])
+
     write_txt_results(results)
     write_tex_results(results)
