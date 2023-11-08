@@ -1,18 +1,14 @@
 import parsing
 from argparse import ArgumentParser
-import algorithms
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs
+from copy import deepcopy
+from utils import get_path_length, print_dict
 
 
-def none(g):
-    parent = algorithms.BFS_ignoring_red_vertices(g)
-    len = 0
-    current = g.target
-    while current in parent :
-        current = parent[current]
-        len+=1
-        if current == g.start :
-            return len
-    return -1
+def none(graph):
+    parent = ignoring_red_vertices_bfs(graph)
+    return get_path_length(graph, parent)
+
 
 def some():
     pass
@@ -26,12 +22,14 @@ def many(g):
     algorithms.topological_sort(g)
 
 
-def alternate():
-    pass
+def alternate(graph):
+    parent = alternating_bfs(graph)
+    length = get_path_length(graph, parent)
+    if length != -1:
+        return 'true'
+    else:
+        return 'false'
 
-def print_dict(d) :
-    for k,v in d.items() :
-        print(str(k), "->", str(v))
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Red scare')
@@ -42,5 +40,6 @@ if __name__ == '__main__':
     # TODO: Hail mary argument that just runs all the files
     # TODO: Run the methods here:
     graph = parsing.open_and_parse(args.file)
-    print(graph)
-    print(none(graph))
+
+    print("alternate", alternate(deepcopy(graph)))
+    print("none", none(deepcopy(graph)))

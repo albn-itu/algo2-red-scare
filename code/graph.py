@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node():
     def __init__(self, name, is_red):
         self.name = name
@@ -20,6 +23,9 @@ class Graph():
     def get_node(self, name):
         return self.nodes[name]
 
+    def neighbours(self, node):
+        return self.edges[node]
+
     def add_node(self, node):
         self.nodes[node.name] = node
         self.edges[node] = []
@@ -32,6 +38,42 @@ class Graph():
 
         if not directed:
             self.edges[node2].append(node1)
+
+    def contains_cycle(self):
+        visited = {k: False for k in self.nodes.values()}
+        recursion = {k: False for k in self.nodes.values()}
+
+        for n in self.nodes.values():
+            if not visited[n]:
+                if self.__isCyclic(n, visited, recursion):
+                    return True
+
+        return False
+
+    def __isCyclic(self, start_vertex: Node, visited, recursion):
+        # Create stack and add adjacent vertices of vertice
+        stack = deque()
+        stack.append((start_vertex, False))
+
+        while stack:
+            current_vertex, reset_recursion_flag = stack.pop()
+
+            if reset_recursion_flag:
+                recursion[current_vertex] = False
+            else:
+
+                if not visited[current_vertex]:
+                    visited[current_vertex] = True
+                    recursion[current_vertex] = True
+                    stack.append((current_vertex, True))
+
+                    for adjacent_node in self.neighbours(current_vertex):
+                        stack.append((adjacent_node, False))
+                elif recursion[current_vertex]:
+                    return True
+
+        recursion[start_vertex] = False
+        return False
 
     def __str__(self):
         def edges_str(edges):
