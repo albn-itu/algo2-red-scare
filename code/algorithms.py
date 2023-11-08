@@ -111,7 +111,7 @@ def longest_chain(g, sorted_nodes):
 def shortest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
     dist[sorted_nodes[-1]] = 0
-    min_dist = sys.maxsize
+    min_dist = sys.maxsize+1
 
     while sorted_nodes:
         node = sorted_nodes.pop()
@@ -126,4 +126,4 @@ def shortest_chain(g, sorted_nodes):
                     if dist[neighbor] < min_dist:
                         min_dist = dist[neighbor]
 
-    return min_dist
+    return -1 if min_dist >= sys.maxsize else min_dist
