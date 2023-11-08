@@ -11,8 +11,12 @@ def none(graph):
 
 
 def some():
-    pass
+    ans = many()
 
+    if (ans == -1 or ans == 0):
+        return False
+    else:
+        return True
 
 def few():
     pass
