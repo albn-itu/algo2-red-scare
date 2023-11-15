@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
         for node in graph.nodes.values():
             f.write(get_node(node, node == graph.start, node == graph.target))
-        for node1, neighbours in graph.edges.items():
+        for node1, neighbours in graph.__edges.items():
             for node2 in neighbours:
                 f.write(get_edge(node1, node2))
         f.write("}")
