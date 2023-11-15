@@ -75,9 +75,9 @@ if __name__ == '__main__':
     with open(f"./graph-output/{filename}.dot", 'w') as f:
         f.write("digraph \"{0}\" {{\n".format(filename))
 
-        for node in graph.nodes.values():
+        for node in graph.nodes():
             f.write(get_node(node, node == graph.start, node == graph.target))
-        for node1, neighbours in graph.__edges.items():
-            for node2 in neighbours:
+        for node1 in graph.nodes():
+            for node2 in graph.neighbours(node1):
                 f.write(get_edge(node1, node2))
         f.write("}")
