@@ -41,6 +41,9 @@ class Graph():
     def edges(self):
         return self.__edges
 
+    def edge(self, node1: Node, node2: Node):
+        return self.__edges[node1][node2]
+
     def neighbours(self, node: Node):
         return list(self.__edges[node].keys())
 

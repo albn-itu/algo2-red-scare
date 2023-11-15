@@ -1,7 +1,10 @@
 # TODO: Write your algorithm code here. Such as BFS, DFS, A*, Ford-Fulkerson, etc.
 from graph import Graph, Node
 from collections import deque, defaultdict
+import heapq
 import sys
+from dataclasses import dataclass, field
+from typing import Any
 
 
 def alternating_bfs(graph):
@@ -170,3 +173,35 @@ def DFS_find_all_paths(graph):
         return False
 
     return dfs(graph, graph.start)
+
+
+def dijkstra(graph):
+    @dataclass(order=True)
+    class PrioritizedItem:
+        priority: int
+        item: Any = field(compare=False)
+
+        def __iter__(self):
+            return iter((self.priority, self.item))
+
+    dist = defaultdict(lambda: sys.maxsize)
+    parent = defaultdict(lambda: None)
+    queue = [PrioritizedItem(0, graph.start)]
+
+    dist[graph.start] = 0
+
+    while queue:
+        cur_dist, cur_vertex = heapq.heappop(queue)
+
+        if cur_dist > dist[cur_vertex]:
+            continue
+
+        for v in graph.neighbours(cur_vertex):
+            new_dist = cur_dist + graph.edge(cur_vertex, v)
+
+            if new_dist < dist[v]:
+                dist[v] = new_dist
+                parent[v] = cur_vertex
+                heapq.heappush(queue, PrioritizedItem(new_dist, v))
+
+    return dist, parent
