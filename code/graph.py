@@ -2,6 +2,7 @@ from functools import cached_property
 from typing import Dict
 from collections import deque
 
+
 class Node():
     def __init__(self, name: str, is_red: bool):
         self.name = name
