@@ -2,7 +2,7 @@ import os
 import sys
 import parsing
 from argparse import ArgumentParser
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, DFS_find_all_paths, dijkstra
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, dfs_find_all_paths, dijkstra
 from copy import deepcopy
 from utils import get_path_length, val_or_na, val_to_str, write_results
 from datetime import datetime
@@ -23,7 +23,7 @@ def some(graph):
     elif graph.contains_cycle():
         return -1
     else:
-        return DFS_find_all_paths(graph)
+        return dfs_find_all_paths(graph)
 
 
 def few(graph):
