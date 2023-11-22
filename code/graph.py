@@ -11,6 +11,8 @@ class Node():
     def __str__(self):
         return f"Node({self.name}, {self.is_red})"
 
+    def __repr__(self):
+        return str(self)
     # TODO: Implement hash and equality. This may be needed for the graph later
 
 
