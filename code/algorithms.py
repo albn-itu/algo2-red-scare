@@ -136,33 +136,42 @@ def DFS_find_all_paths(graph):
 
         stack = []
         visited = []
+        current_path = []
+        nodes_with_path_to_goal = set()
         redCount = 0
 
         stack.append((start, False))
 
         while len(stack):
             current, is_back = stack.pop()
+            # print("Current: ", current.name, ", is back: ", is_back)
 
             if is_back:
-                visited.pop()
+                # visited.pop()
+                current_path.pop()
                 if current.is_red:
                     redCount -= 1
                 continue
-            elif (current == graph.target): 
+            elif (current == graph.start): 
                 if (redCount > 0 or current.is_red):
                     return True
                 else:
+                    for v in current_path:
+                        nodes_with_path_to_goal.add(v)
                     continue
                 
             visited.append(current)
+            current_path.append(current)
             stack.append((current, True)) # Add trace back
             if current.is_red:
                 redCount += 1
 
             for neighbor in graph.edges[current]:
-                if neighbor not in visited:
+                if neighbor in nodes_with_path_to_goal and redCount > 0:
+                    return True
+                elif neighbor not in visited:
                     stack.append((neighbor, False))
 
         return False
     
-    return dfs(graph, graph.start)
+    return dfs(graph, graph.target)
