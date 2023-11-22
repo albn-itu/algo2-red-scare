@@ -18,6 +18,8 @@ def some(graph):
         return True
     elif (ans == 0):
         return False
+    elif graph.contains_cycle():
+        return -1
     else:
         return DFS_find_all_paths(graph)
         
