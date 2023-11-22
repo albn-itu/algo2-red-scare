@@ -50,7 +50,7 @@ Let $\ldots$
 
 I was also unable to solve $\cdots$ for $\cdots$, but I don’t know why.\footnote{Remove or expand as necessary.}
 
-For problem F...
+For problem F we've solved each instance with Dijkstra's algorithm to find the path containing the fewest amount of red vertices. We've achieved this by assigning each edge entering a red vertex a weight of 1. Every other edge is assigned a vertex of 0. Thereby the path with the smallest cost to get from $s$ to $t$ must be the one that enters the fewest red vertices. Since Dijkstra only allows simple paths, the cost of the path must also be the total amount of red vertices that the path enters. Therefore the cost to get to $t$ is the total red vertices the path enters. In case there is no path from $s$ to $t$ the cost to get to $t$ will be $sys.maxsize$.
 
 For problem M...
 
