@@ -50,9 +50,7 @@ def test_ignoring_red_vertices_bfs(test_file, expected_length):
     assert get_path_length(graph, parent) == expected_length
 
 
-
 def test_longest_chain():
-
     data = [
         "5", "5", "3", "1", "5",  # n,m,r,s,t
         "1", "*", "2", "*", "3", "4", "*", "5",  # vertex
@@ -70,9 +68,7 @@ def test_longest_chain():
     assert max_red_path == 3
 
 
-
 def test_shortest_chain():
-
     data = [
         "5", "5", "3", "1", "5",  # n,m,r,s,t
         "1", "*", "2", "*", "3", "4", "*", "5",  # vertex
@@ -89,6 +85,7 @@ def test_shortest_chain():
 
     assert min_red_path == 1
 
+
 def test_dijkstra_g_ex():
     data = ["8", "9", "3", "0", "3", "0", "1", "2", "3", "4", "*", "5", "*",
             "6", "7", "*", "0", "--", "1", "1", "--",
@@ -99,6 +96,7 @@ def test_dijkstra_g_ex():
     dist, parent = dijkstra(graph)
 
     assert dist[graph.target] == 0
+
 
 def test_dijkstra_line():
     data = ["4", "3", "4",
@@ -115,6 +113,7 @@ def test_dijkstra_line():
     dist, parent = dijkstra(graph)
 
     assert dist[graph.target] == 3
+
 
 def test_dijkstra_classic():
     data = ["6", "3", "4",
@@ -138,6 +137,7 @@ def test_dijkstra_classic():
 
     assert dist[graph.target] == 1
 
+
 @pytest.mark.parametrize("test_file,expected_result", [
     ("../data/G-ex.txt", True),
     ("../data/P3.txt", True),
@@ -154,7 +154,6 @@ def test_dijkstra_classic():
     ("../data/increase-n8-1.txt", True),
     ("../data/increase-n8-2.txt", True),
 ])
-
 def test_dfs(test_file, expected_result):
     graph = open_and_parse(test_file)
     result = dfs_find_all_paths(graph)
