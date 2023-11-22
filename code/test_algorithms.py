@@ -49,6 +49,7 @@ def test_ignoring_red_vertices_bfs(test_file, expected_length):
 
     assert get_path_length(graph, parent) == expected_length
 
+
 def test_longest_chain():
 
     data = [
@@ -66,6 +67,7 @@ def test_longest_chain():
     max_red_path = longest_chain(graph, sorted_nodes)
 
     assert max_red_path == 3
+
 
 def test_shortest_chain():
 
