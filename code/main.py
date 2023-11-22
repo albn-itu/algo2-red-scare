@@ -42,7 +42,8 @@ def many(graph):
         if contains_path_to_target:
             return longest_chain(graph, sorted_nodes)
 
-    return -1
+    return -2
+
 
 def alternate(graph):
     parent = alternating_bfs(graph)
@@ -112,4 +113,5 @@ if __name__ == '__main__':
         print(f"Few:\t{res[3]}")
         print(f"Man:\t{res[4]}")
         print(f"Non:\t{res[5]}")
+        print(f"Som:\t{res[6]}")
         print(f"Som:\t{res[6]}")
