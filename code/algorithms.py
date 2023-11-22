@@ -51,7 +51,6 @@ def bfs_general(
     return parent
 
 
-
 def topological_sort(graph: Graph):
     """
     Sorts the graph in a topological order
@@ -94,7 +93,6 @@ def topological_sort(graph: Graph):
 def longest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
     dist[sorted_nodes[-1]] = 0
-    max_dist = -1
 
     while sorted_nodes:
         node = sorted_nodes.pop()
@@ -106,10 +104,8 @@ def longest_chain(g, sorted_nodes):
                 if dist[neighbor] < dist[node] + a:
                     dist[neighbor] = dist[node] + a
 
-                    if dist[neighbor] > max_dist:
-                        max_dist = dist[neighbor]
+    return dist[g.target]
 
-    return max_dist
 
 def shortest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
