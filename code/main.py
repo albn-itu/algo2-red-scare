@@ -13,18 +13,21 @@ def none(graph):
     return get_path_length(graph, parent)
 
 
-def some(graph):
-    ans = many(graph)
+def some(graph, many_res, few_res):
 
-    if (ans > 0):
+    if (many_res > 0 or few_res > 0):
         return True
-    elif (ans == 0):
+    elif (many_res == 0):
         return False
     else:
         return DFS_find_all_paths(graph)
 
 
-def few(graph):
+def few(graph, none_res):
+
+    if none_res > 0 and (not graph.start.is_red and not graph.target.is_red):
+        return 0
+
     dist, _ = dijkstra(graph)
     if dist[graph.target] == sys.maxsize:
         return -1
@@ -50,29 +53,27 @@ def alternate(graph):
 
 def run(graph):
     print("{} - alternate".format(datetime.now().strftime("%H:%M:%S")))
-    a = val_or_na(alternate(deepcopy(graph)))
+    n = none(deepcopy(graph))
 
     print("{} - few".format(datetime.now().strftime("%H:%M:%S")))
-    f = val_or_na(few(deepcopy(graph)))
+    f = few(deepcopy(graph), n)
 
     print("{} - many".format(datetime.now().strftime("%H:%M:%S")))
-    m = val_or_na(many(deepcopy(graph)))
+    m = many(deepcopy(graph))
 
     print("{} - none".format(datetime.now().strftime("%H:%M:%S")))
-    n = val_or_na(none(deepcopy(graph)))
+    a = alternate(deepcopy(graph))
 
     print("{} - some".format(datetime.now().strftime("%H:%M:%S")))
-    s = val_or_na(some(deepcopy(graph)))
+    s = some(deepcopy(graph), m, f)
 
-    return [
-        graph.name,
-        val_to_str(graph.n),
-        val_to_str(a),
-        val_to_str(f),
-        val_to_str(m),
-        val_to_str(n),
-        val_to_str(s),
-    ]
+    return [graph.name, 
+            val_to_str(graph.n), 
+            val_to_str(val_or_na(a)), 
+            val_to_str(val_or_na(f)), 
+            val_to_str(val_or_na(m)), 
+            val_to_str(val_or_na(n)), 
+            val_to_str(val_or_na(s))]
 
 
 def gather_results():
