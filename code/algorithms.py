@@ -152,7 +152,7 @@ def DFS_find_all_paths(graph):
                 if current.is_red:
                     redCount -= 1
                 continue
-            elif (current == graph.start): 
+            elif (current == graph.target): 
                 if (redCount > 0 or current.is_red):
                     return True
                 else:
@@ -174,4 +174,4 @@ def DFS_find_all_paths(graph):
 
         return False
     
-    return dfs(graph, graph.target)
+    return dfs(graph, graph.start)
