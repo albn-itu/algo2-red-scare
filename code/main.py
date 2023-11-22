@@ -37,13 +37,12 @@ def few(graph, none_res):
 def many(graph):
     # Not possible to run many with topological sort when graph has a cycle
     if graph.is_directed() and not graph.contains_cycle:
-        sorted_nodes = topological_sort(graph)
-        path = longest_chain(graph, sorted_nodes)
+        sorted_nodes, contains_path_to_target = topological_sort(graph)
 
-        return path
-    else:
-        return -2
+        if contains_path_to_target:
+            return longest_chain(graph, sorted_nodes)
 
+    return -1
 
 def alternate(graph):
     parent = alternating_bfs(graph)
