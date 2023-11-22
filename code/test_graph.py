@@ -11,7 +11,7 @@ def test_contains_cycle_small():
     ]
 
     graph = parse(data)
-    assert graph.contains_cycle()
+    assert graph.contains_cycle
 
 
 def test_contains_cycle_bigger():
@@ -27,7 +27,7 @@ def test_contains_cycle_bigger():
     ]
 
     graph = parse(data)
-    assert graph.contains_cycle()
+    assert graph.contains_cycle
 
 
 def test_does_not_contain_cycle_small():
@@ -40,4 +40,4 @@ def test_does_not_contain_cycle_small():
     ]
 
     graph = parse(data)
-    assert not graph.contains_cycle()
+    assert not graph.contains_cycle
