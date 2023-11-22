@@ -87,14 +87,9 @@ def topological_sort(graph: Graph):
     sorted_nodes = []
 
     dfs(graph, graph.start, visited, sorted_nodes)
+    contains_path_to_target = graph.target in visited
 
-    for node in graph.nodes():
-        if node not in visited:
-            dfs(graph, node, visited, sorted_nodes)
-
-    return sorted_nodes
-
-
+    return sorted_nodes, contains_path_to_target
 
 def longest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
@@ -115,8 +110,6 @@ def longest_chain(g, sorted_nodes):
                         max_dist = dist[neighbor]
 
     return max_dist
-
-
 
 def shortest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
