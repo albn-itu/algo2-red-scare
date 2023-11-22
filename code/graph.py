@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict
 from collections import deque
 
 
@@ -14,15 +14,12 @@ class Node():
 
 
 class Graph():
-    __nodes: Dict[str, Node]         # string -> Node
-    __edges: Dict[Node, List[Node]]  # Node -> Node[]
-
     def __init__(self, n: int, start: Node, target: Node):
         self.name = "unnamed"
         self.n = n
 
-        self.__nodes = dict()
-        self.__edges = dict()
+        self.__nodes = dict()  # string -> Node
+        self.__edges = dict()  # Node -> Node -> int
 
         self.start = start
         self.target = target
@@ -44,23 +41,26 @@ class Graph():
     def edges(self):
         return self.__edges
 
+    def edge(self, node1: Node, node2: Node):
+        return self.__edges[node1][node2]
+
     def neighbours(self, node: Node):
-        return self.__edges[node]
+        return list(self.__edges[node].keys())
 
     def add_node(self, node: Node):
         self.__nodes[node.name] = node
-        self.__edges[node] = []
+        self.__edges[node] = dict()
 
     def add_edge(self, node1: Node, node2: Node, directed=False):
         """
         Adds edge between the two nodes.
         If it is not directed then a reverse edge is being added as well
         """
-        self.__edges[node1].append(node2)
+        self.__edges[node1][node2] = 1 if node2.is_red else 0
 
         if not directed:
             self.directed = False
-            self.__edges[node2].append(node1)
+            self.__edges[node2][node1] = 1 if node1.is_red else 0
 
     def is_directed(self):
         return self.directed
