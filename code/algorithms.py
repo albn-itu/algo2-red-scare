@@ -144,10 +144,8 @@ def DFS_find_all_paths(graph):
 
         while len(stack):
             current, is_back = stack.pop()
-            # print("Current: ", current.name, ", is back: ", is_back)
 
             if is_back:
-                # visited.pop()
                 current_path.pop()
                 if current.is_red:
                     redCount -= 1
