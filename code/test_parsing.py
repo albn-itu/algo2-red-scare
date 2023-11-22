@@ -18,14 +18,17 @@ def test_parse_undirected_small():
     ]
 
     graph = parse(data)
-    assert len(graph.nodes) == 2
-    assert graph.nodes["node1"] != graph.nodes["node2"]
-    assert graph.nodes["node1"] == graph.start
-    assert graph.nodes["node2"] == graph.target
+    print(graph.nodes())
+    assert len(graph.nodes()) == 2
+    assert graph.get_node("node1") != graph.get_node("node2")
+    assert graph.get_node("node1") == graph.start
+    assert graph.get_node("node2") == graph.target
 
-    assert len(graph.edges) == 2  # Because each node has an empty edge list
-    assert graph.edges[graph.nodes["node1"]] == [graph.nodes["node2"]]
-    assert graph.edges[graph.nodes["node2"]] == [graph.nodes["node1"]]
+    assert len(graph.edges()) == 2  # Because each node has an empty edge list
+    assert graph.neighbours(graph.get_node("node1")) == [
+        graph.get_node("node2")]
+    assert graph.neighbours(graph.get_node("node2")) == [
+        graph.get_node("node1")]
 
 
 def test_parse_directed_small():
@@ -36,14 +39,15 @@ def test_parse_directed_small():
     ]
 
     graph = parse(data)
-    assert len(graph.nodes) == 2
-    assert graph.nodes["node1"] != graph.nodes["node2"]
-    assert graph.nodes["node1"] == graph.start
-    assert graph.nodes["node2"] == graph.target
+    assert len(graph.nodes()) == 2
+    assert graph.get_node("node1") != graph.get_node("node2")
+    assert graph.get_node("node1") == graph.start
+    assert graph.get_node("node2") == graph.target
 
-    assert len(graph.edges) == 2  # Because each node has an empty edge list
-    assert graph.edges[graph.nodes["node1"]] == [graph.nodes["node2"]]
-    assert graph.edges[graph.nodes["node2"]] == []
+    assert len(graph.edges()) == 2  # Because each node has an empty edge list
+    assert graph.neighbours(graph.get_node("node1")) == [
+        graph.get_node("node2")]
+    assert graph.neighbours(graph.get_node("node2")) == []
 
 
 def test_parse_directed_slightly_larger():
@@ -55,11 +59,13 @@ def test_parse_directed_slightly_larger():
     ]
 
     graph = parse(data)
-    assert len(graph.nodes) == 3
-    assert graph.nodes["node1"] == graph.start
-    assert graph.nodes["node3"] == graph.target
+    assert len(graph.nodes()) == 3
+    assert graph.get_node("node1") == graph.start
+    assert graph.get_node("node3") == graph.target
 
-    assert len(graph.edges) == 3  # Because each node has an empty edge list
-    assert graph.edges[graph.nodes["node1"]] == [graph.nodes["node2"]]
-    assert graph.edges[graph.nodes["node2"]] == [graph.nodes["node3"]]
-    assert graph.edges[graph.nodes["node3"]] == []
+    assert len(graph.edges()) == 3  # Because each node has an empty edge list
+    assert graph.neighbours(graph.get_node("node1")) == [
+        graph.get_node("node2")]
+    assert graph.neighbours(graph.get_node("node2")) == [
+        graph.get_node("node3")]
+    assert graph.neighbours(graph.get_node("node3")) == []

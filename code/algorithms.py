@@ -1,7 +1,10 @@
 # TODO: Write your algorithm code here. Such as BFS, DFS, A*, Ford-Fulkerson, etc.
 from graph import Graph, Node
 from collections import deque, defaultdict
+import heapq
 import sys
+from dataclasses import dataclass, field
+from typing import Any
 
 
 def alternating_bfs(graph):
@@ -47,6 +50,7 @@ def bfs_general(
 
     return parent
 
+
 def topological_sort(graph: Graph):
     """
     Sorts the graph in a topological order
@@ -56,7 +60,7 @@ def topological_sort(graph: Graph):
 
     def dfs(graph: Graph, start: Node, visited, sorted_nodes):
         """
-        Performs depth first search on a graph 
+        Performs depth first search on a graph
         """
 
         stack = []
@@ -71,9 +75,9 @@ def topological_sort(graph: Graph):
                 continue
 
             visited.add(current)
-            stack.append((current, True)) # Add trace back
+            stack.append((current, True))  # Add trace back
 
-            for neighbor in graph.edges[current]:
+            for neighbor in graph.neighbours(current):
                 if neighbor not in visited:
                     stack.append((neighbor, False))
 
@@ -82,11 +86,12 @@ def topological_sort(graph: Graph):
 
     dfs(graph, graph.start, visited, sorted_nodes)
 
-    for node in graph.edges:
+    for node in graph.nodes():
         if node not in visited:
             dfs(graph, node, visited, sorted_nodes)
 
     return sorted_nodes
+
 
 def longest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
@@ -99,7 +104,7 @@ def longest_chain(g, sorted_nodes):
         a = 1 if node.is_red else 0
 
         if dist[node] != -1:
-            for neighbor in g.edges[node]:
+            for neighbor in g.neighbours(node):
                 if dist[neighbor] < dist[node] + a:
                     dist[neighbor] = dist[node] + a
 
@@ -107,6 +112,7 @@ def longest_chain(g, sorted_nodes):
                         max_dist = dist[neighbor]
 
     return max_dist
+
 
 def shortest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
@@ -119,7 +125,7 @@ def shortest_chain(g, sorted_nodes):
         a = 1 if node.is_red else 0
 
         if dist[node] != -1:
-            for neighbor in g.edges[node]:
+            for neighbor in g.neighbours(node):
                 if dist[neighbor] < dist[node] + a:
                     dist[neighbor] = dist[node] + a
 
@@ -127,6 +133,7 @@ def shortest_chain(g, sorted_nodes):
                         min_dist = dist[neighbor]
 
     return -1 if min_dist >= sys.maxsize else min_dist
+
 
 def DFS_find_all_paths(graph):
     def dfs(graph: Graph, start: Node):
@@ -150,26 +157,58 @@ def DFS_find_all_paths(graph):
                 if current.is_red:
                     redCount -= 1
                 continue
-            elif (current == graph.target): 
+            elif (current == graph.target):
                 if (redCount > 0 or current.is_red):
                     return True
                 else:
                     for v in current_path:
                         nodes_with_path_to_goal.add(v)
                     continue
-                
+
             visited.append(current)
             current_path.append(current)
             stack.append((current, True)) # Add trace back
             if current.is_red:
                 redCount += 1
 
-            for neighbor in graph.edges[current]:
+            for neighbor in graph.neighbours(current):
                 if neighbor in nodes_with_path_to_goal and redCount > 0:
                     return True
                 elif neighbor not in visited:
                     stack.append((neighbor, False))
 
         return False
-    
+
     return dfs(graph, graph.start)
+
+
+def dijkstra(graph):
+    @dataclass(order=True)
+    class PrioritizedItem:
+        priority: int
+        item: Any = field(compare=False)
+
+        def __iter__(self):
+            return iter((self.priority, self.item))
+
+    dist = defaultdict(lambda: sys.maxsize)
+    parent = defaultdict(lambda: None)
+    queue = [PrioritizedItem(0, graph.start)]
+
+    dist[graph.start] = 0
+
+    while queue:
+        cur_dist, cur_vertex = heapq.heappop(queue)
+
+        if cur_dist > dist[cur_vertex]:
+            continue
+
+        for v in graph.neighbours(cur_vertex):
+            new_dist = cur_dist + graph.edge(cur_vertex, v)
+
+            if new_dist < dist[v]:
+                dist[v] = new_dist
+                parent[v] = cur_vertex
+                heapq.heappush(queue, PrioritizedItem(new_dist, v))
+
+    return dist, parent

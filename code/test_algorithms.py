@@ -1,7 +1,7 @@
 import pytest
 from parsing import open_and_parse, parse
 from utils import get_path_length
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain, dijkstra
 
 
 @pytest.mark.parametrize("test_file,expected_length", [
@@ -49,6 +49,7 @@ def test_ignoring_red_vertices_bfs(test_file, expected_length):
 
     assert get_path_length(graph, parent) == expected_length
 
+
 def test_longest_chain():
 
     data = [
@@ -67,6 +68,7 @@ def test_longest_chain():
 
     assert max_red_path == 3
 
+
 def test_shortest_chain():
 
     data = [
@@ -84,3 +86,55 @@ def test_shortest_chain():
     min_red_path = shortest_chain(graph, sorted_nodes)
 
     assert min_red_path == 1
+
+
+def test_dijkstra_g_ex():
+    data = ["8", "9", "3", "0", "3", "0", "1", "2", "3", "4", "*", "5", "*",
+            "6", "7", "*", "0", "--", "1", "1", "--",
+            "2", "2", "--", "3", "0", "--", "4", "4", "--", "3", "0", "--", "5",
+            "5", "--", "6", "6", "--", "7", "7", "--", "3"]
+
+    graph = parse(data)
+    dist, parent = dijkstra(graph)
+
+    assert dist[graph.target] == 0
+
+
+def test_dijkstra_line():
+    data = ["4", "3", "4",
+            "0", "3",
+            "0", "*",
+            "1", "*",
+            "2", "*",
+            "3", "*",
+            "0", "--", "1",
+            "1", "--", "2",
+            "2", "--", "3"]
+
+    graph = parse(data)
+    dist, parent = dijkstra(graph)
+
+    assert dist[graph.target] == 3
+
+
+def test_dijkstra_classic():
+    data = ["6", "3", "4",
+            "0", "3",
+            "0",
+            "1",
+            "2", "*",
+            "3", "*",
+            "4",
+            "5", "*",
+            "0", "--", "1",
+            "0", "--", "2",
+            "1", "--", "3",
+            "2", "--", "4",
+            "3", "--", "5",
+            "4", "--", "5",
+            "1", "--", "4"]
+
+    graph = parse(data)
+    dist, parent = dijkstra(graph)
+
+    assert dist[graph.target] == 1
