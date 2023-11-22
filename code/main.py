@@ -11,12 +11,11 @@ def none(graph):
     return get_path_length(graph, parent)
 
 
-def some(graph):
-    ans = many(graph)
+def some(graph, many_res, few_res):
 
-    if (ans > 0):
+    if (many_res > 0 or few_res > 0):
         return True
-    elif (ans == 0):
+    elif (many_res == 0):
         return False
     else:
         return DFS_find_all_paths(graph)
@@ -55,13 +54,18 @@ def alternate(graph):
 
 
 def run(graph):
-    a = val_or_na(alternate(deepcopy(graph)))
-    f = val_or_na(few(deepcopy(graph)))
-    m = val_or_na(many(deepcopy(graph)))
-    n = val_or_na(none(deepcopy(graph)))
-    s = val_or_na(some(deepcopy(graph)))
+    n = none(deepcopy(graph))
+    f = few(deepcopy(graph))
+    m = many(deepcopy(graph))
+    s = some(deepcopy(graph), m, f)
+    a = alternate(deepcopy(graph))
 
-    return [graph.name, graph.n, a, f, m, n, s]
+    return [graph.name, graph.n, 
+            val_or_na(a), 
+            val_or_na(f), 
+            val_or_na(m), 
+            val_or_na(n), 
+            val_or_na(s)]
 
 
 def gather_results():
