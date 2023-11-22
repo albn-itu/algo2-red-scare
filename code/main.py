@@ -1,7 +1,8 @@
 import os
+import sys
 import parsing
 from argparse import ArgumentParser
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain, DFS_find_all_paths
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, DFS_find_all_paths, dijkstra
 from copy import deepcopy
 from utils import get_path_length, val_or_na, write_results
 
@@ -19,18 +20,13 @@ def some(graph, many_res, few_res):
         return False
     else:
         return DFS_find_all_paths(graph)
-        
 
 
 def few(graph):
-    # Not possible to run many with topological sort when graph has a cycle
-    if graph.is_directed() and not graph.contains_cycle():
-        sorted_nodes = topological_sort(graph)
-        path = shortest_chain(graph, sorted_nodes)
-
-        return path
-    else:
+    dist, _ = dijkstra(graph)
+    if dist[graph.target] == sys.maxsize:
         return -1
+    return dist[graph.target]
 
 
 def many(graph):
