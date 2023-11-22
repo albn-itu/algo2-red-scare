@@ -2,6 +2,7 @@ import os
 import parsing
 from argparse import ArgumentParser
 from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain, DFS_find_all_paths
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain, dfs_find_all_paths
 from copy import deepcopy
 from utils import get_path_length, val_or_na, write_results
 
@@ -19,8 +20,7 @@ def some(graph):
     elif (ans == 0):
         return False
     else:
-        return DFS_find_all_paths(graph)
-        
+        return dfs_find_all_paths(graph)
 
 
 def few(graph):
