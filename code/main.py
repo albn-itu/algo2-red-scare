@@ -36,7 +36,7 @@ def few(graph, none_res):
 
 def many(graph):
     # Not possible to run many with topological sort when graph has a cycle
-    if graph.is_directed() and not graph.contains_cycle():
+    if graph.is_directed() and not graph.contains_cycle:
         sorted_nodes, contains_path_to_target = topological_sort(graph)
 
         if contains_path_to_target:
