@@ -62,7 +62,7 @@ def test_longest_chain():
     ]
 
     graph = parse(data)
-    sorted_nodes = topological_sort(graph)
+    sorted_nodes, _ = topological_sort(graph)
     max_red_path = longest_chain(graph, sorted_nodes)
 
     assert max_red_path == 3
@@ -80,7 +80,7 @@ def test_shortest_chain():
     ]
 
     graph = parse(data)
-    sorted_nodes = topological_sort(graph)
+    sorted_nodes, _ = topological_sort(graph)
     min_red_path = shortest_chain(graph, sorted_nodes)
 
     assert min_red_path == 1
