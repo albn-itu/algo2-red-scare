@@ -14,19 +14,17 @@ def none(graph):
 
 
 def some(graph, many_res, few_res):
-
     if (many_res > 0 or few_res > 0):
         return True
     elif (many_res == 0):
         return False
-    elif graph.contains_cycle():
-        return -1
+    elif graph.contains_cycle:
+        return -2
     else:
         return dfs_find_all_paths(graph)
 
 
 def few(graph, none_res):
-
     if none_res > 0 and (not graph.start.is_red and not graph.target.is_red):
         return 0
 
@@ -38,13 +36,13 @@ def few(graph, none_res):
 
 def many(graph):
     # Not possible to run many with topological sort when graph has a cycle
-    if graph.is_directed() and not graph.contains_cycle():
+    if graph.is_directed() and not graph.contains_cycle:
         sorted_nodes = topological_sort(graph)
         path = longest_chain(graph, sorted_nodes)
 
         return path
     else:
-        return -1
+        return -2
 
 
 def alternate(graph):
@@ -69,12 +67,12 @@ def run(graph):
     print("{} - some".format(datetime.now().strftime("%H:%M:%S")))
     s = some(deepcopy(graph), m, f)
 
-    return [graph.name, 
-            val_to_str(graph.n), 
-            val_to_str(val_or_na(a)), 
-            val_to_str(val_or_na(f)), 
-            val_to_str(val_or_na(m)), 
-            val_to_str(val_or_na(n)), 
+    return [graph.name,
+            val_to_str(graph.n),
+            val_to_str(val_or_na(a)),
+            val_to_str(val_or_na(f)),
+            val_to_str(val_or_na(m)),
+            val_to_str(val_or_na(n)),
             val_to_str(val_or_na(s))]
 
 

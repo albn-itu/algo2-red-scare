@@ -27,6 +27,8 @@ def val_to_str(val):
     elif isinstance(val, bool):
         return "true" if val else "false"
     elif isinstance(val, int):
+        if val == -2:
+            return '?!'
         return str(val)
 
 
