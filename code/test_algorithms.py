@@ -1,7 +1,7 @@
 import pytest
 from parsing import open_and_parse, parse
 from utils import get_path_length
-from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain, dijkstra
+from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, shortest_chain, dijkstra, dfs_find_all_paths
 
 
 @pytest.mark.parametrize("test_file,expected_length", [
@@ -50,6 +50,7 @@ def test_ignoring_red_vertices_bfs(test_file, expected_length):
     assert get_path_length(graph, parent) == expected_length
 
 
+
 def test_longest_chain():
 
     data = [
@@ -67,6 +68,7 @@ def test_longest_chain():
     max_red_path = longest_chain(graph, sorted_nodes)
 
     assert max_red_path == 3
+
 
 
 def test_shortest_chain():
@@ -87,7 +89,6 @@ def test_shortest_chain():
 
     assert min_red_path == 1
 
-
 def test_dijkstra_g_ex():
     data = ["8", "9", "3", "0", "3", "0", "1", "2", "3", "4", "*", "5", "*",
             "6", "7", "*", "0", "--", "1", "1", "--",
@@ -98,7 +99,6 @@ def test_dijkstra_g_ex():
     dist, parent = dijkstra(graph)
 
     assert dist[graph.target] == 0
-
 
 def test_dijkstra_line():
     data = ["4", "3", "4",
@@ -115,7 +115,6 @@ def test_dijkstra_line():
     dist, parent = dijkstra(graph)
 
     assert dist[graph.target] == 3
-
 
 def test_dijkstra_classic():
     data = ["6", "3", "4",
@@ -138,3 +137,26 @@ def test_dijkstra_classic():
     dist, parent = dijkstra(graph)
 
     assert dist[graph.target] == 1
+
+@pytest.mark.parametrize("test_file,expected_result", [
+    ("../data/G-ex.txt", True),
+    ("../data/P3.txt", True),
+    ("./test-data/P3-1.txt", True),
+    ("./test-data/K3-0.txt", True),
+    ("./test-data/K3-1.txt", True),
+    ("./test-data/K3-2.txt", False),
+    ("../data/rusty-1-17.txt", True),
+    ("../data/grid-5-0.txt", True),
+    ("../data/wall-p-1.txt", True),
+    ("../data/wall-p-3.txt", True),
+    ("../data/wall-z-3.txt", False),
+    ("../data/wall-n-2.txt", False),
+    ("../data/increase-n8-1.txt", True),
+    ("../data/increase-n8-2.txt", True),
+])
+
+def test_dfs(test_file, expected_result):
+    graph = open_and_parse(test_file)
+    result = dfs_find_all_paths(graph)
+
+    assert result == expected_result

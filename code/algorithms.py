@@ -51,6 +51,7 @@ def bfs_general(
     return parent
 
 
+
 def topological_sort(graph: Graph):
     """
     Sorts the graph in a topological order
@@ -76,6 +77,7 @@ def topological_sort(graph: Graph):
 
             visited.add(current)
             stack.append((current, True))  # Add trace back
+            stack.append((current, True))  # Add trace back
 
             for neighbor in graph.neighbours(current):
                 if neighbor not in visited:
@@ -91,6 +93,7 @@ def topological_sort(graph: Graph):
             dfs(graph, node, visited, sorted_nodes)
 
     return sorted_nodes
+
 
 
 def longest_chain(g, sorted_nodes):
@@ -114,6 +117,7 @@ def longest_chain(g, sorted_nodes):
     return max_dist
 
 
+
 def shortest_chain(g, sorted_nodes):
     dist = defaultdict(lambda: -1)
     dist[sorted_nodes[-1]] = 0
@@ -135,7 +139,7 @@ def shortest_chain(g, sorted_nodes):
     return -1 if min_dist >= sys.maxsize else min_dist
 
 
-def DFS_find_all_paths(graph):
+def dfs_find_all_paths(graph):
     def dfs(graph: Graph, start: Node):
         """
         Performs depth first search on a graph 
@@ -167,7 +171,7 @@ def DFS_find_all_paths(graph):
 
             visited.append(current)
             current_path.append(current)
-            stack.append((current, True)) # Add trace back
+            stack.append((current, True))  # Add trace back
             if current.is_red:
                 redCount += 1
 
