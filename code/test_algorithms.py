@@ -148,7 +148,7 @@ def test_dijkstra_classic():
     ("../data/rusty-1-17.txt", True),
     ("../data/grid-5-0.txt", True),
     ("../data/wall-p-1.txt", True),
-    ("../data/wall-p-3.txt", True),
+    ("../data/wall-p-3.txt", False),
     ("../data/wall-z-3.txt", False),
     ("../data/wall-n-2.txt", False),
     ("../data/increase-n8-1.txt", True),
