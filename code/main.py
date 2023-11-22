@@ -22,7 +22,11 @@ def some(graph, many_res, few_res):
         return DFS_find_all_paths(graph)
 
 
-def few(graph):
+def few(graph, none_res):
+
+    if none_res > 0 and (not graph.start.is_red and not graph.target.is_red):
+        return 0
+
     dist, _ = dijkstra(graph)
     if dist[graph.target] == sys.maxsize:
         return -1
@@ -51,10 +55,10 @@ def alternate(graph):
 
 def run(graph):
     n = none(deepcopy(graph))
-    f = few(deepcopy(graph))
+    f = few(deepcopy(graph), n)
     m = many(deepcopy(graph))
-    s = some(deepcopy(graph), m, f)
     a = alternate(deepcopy(graph))
+    s = some(deepcopy(graph), m, f)
 
     return [graph.name, graph.n, 
             val_or_na(a), 
