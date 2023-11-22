@@ -4,7 +4,8 @@ import parsing
 from argparse import ArgumentParser
 from algorithms import alternating_bfs, ignoring_red_vertices_bfs, topological_sort, longest_chain, DFS_find_all_paths, dijkstra
 from copy import deepcopy
-from utils import get_path_length, val_or_na, write_results
+from utils import get_path_length, val_or_na, val_to_str, write_results
+from datetime import datetime
 
 
 def none(graph):
@@ -47,25 +48,32 @@ def many(graph):
 def alternate(graph):
     parent = alternating_bfs(graph)
     length = get_path_length(graph, parent)
-    if length != -1:
-        return 'true'
-    else:
-        return 'false'
+    return length != -1
 
 
 def run(graph):
+    print("{} - alternate".format(datetime.now().strftime("%H:%M:%S")))
     n = none(deepcopy(graph))
+
+    print("{} - few".format(datetime.now().strftime("%H:%M:%S")))
     f = few(deepcopy(graph), n)
+
+    print("{} - many".format(datetime.now().strftime("%H:%M:%S")))
     m = many(deepcopy(graph))
+
+    print("{} - none".format(datetime.now().strftime("%H:%M:%S")))
     a = alternate(deepcopy(graph))
+
+    print("{} - some".format(datetime.now().strftime("%H:%M:%S")))
     s = some(deepcopy(graph), m, f)
 
-    return [graph.name, graph.n, 
-            val_or_na(a), 
-            val_or_na(f), 
-            val_or_na(m), 
-            val_or_na(n), 
-            val_or_na(s)]
+    return [graph.name, 
+            val_to_str(graph.n), 
+            val_to_str(val_or_na(a)), 
+            val_to_str(val_or_na(f)), 
+            val_to_str(val_or_na(m)), 
+            val_to_str(val_or_na(n)), 
+            val_to_str(val_or_na(s))]
 
 
 def gather_results():

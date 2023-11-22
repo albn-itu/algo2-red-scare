@@ -21,6 +21,15 @@ def val_or_na(val):
     return val if val is not None else "NA"
 
 
+def val_to_str(val):
+    if isinstance(val, str):
+        return val
+    elif isinstance(val, bool):
+        return "true" if val else "false"
+    elif isinstance(val, int):
+        return str(val)
+
+
 def write_txt_results(results):
     with open('graph-output/results.txt', 'w') as f:
         results = [["instance", "n", "A", "F", "M", "N", "S"]] + results
