@@ -46,28 +46,35 @@ def many(graph):
 
     return -2
 
-
 def alternate(graph):
     parent = alternating_bfs(graph)
     length = get_path_length(graph, parent)
     return length != -1
 
 
+def time(f, args):
+    start = datetime.now()
+    result = f(*args)
+    end = datetime.now()
+
+    return result, (str(round((end - start).total_seconds() * 1000, 3)) + " ms")
+
+
 def run(graph):
-    print("{} - alternate".format(datetime.now().strftime("%H:%M:%S")))
-    n = none(deepcopy(graph))
+    print("{} - none".format(datetime.now().strftime("%H:%M:%S")))
+    n, n_time = time(none, [deepcopy(graph)])
 
     print("{} - few".format(datetime.now().strftime("%H:%M:%S")))
-    f = few(deepcopy(graph), n)
+    f, f_time = time(few, [deepcopy(graph), n])
 
     print("{} - many".format(datetime.now().strftime("%H:%M:%S")))
-    m = many(deepcopy(graph))
+    m, m_time = time(many, [deepcopy(graph)])
 
-    print("{} - none".format(datetime.now().strftime("%H:%M:%S")))
-    a = alternate(deepcopy(graph))
+    print("{} - alternate".format(datetime.now().strftime("%H:%M:%S")))
+    a, a_time = time(alternate, [deepcopy(graph)])
 
     print("{} - some".format(datetime.now().strftime("%H:%M:%S")))
-    s = some(deepcopy(graph), m, f)
+    s, s_time = time(some, [deepcopy(graph), m, f])
 
     return [graph.name,
             val_to_str(graph.n),
@@ -75,7 +82,13 @@ def run(graph):
             val_to_str(val_or_na(f)),
             val_to_str(val_or_na(m)),
             val_to_str(val_or_na(n)),
-            val_to_str(val_or_na(s))]
+            val_to_str(val_or_na(s)),
+            val_to_str(a_time),
+            val_to_str(f_time),
+            val_to_str(m_time if m != -2 else -2),
+            val_to_str(n_time),
+            val_to_str(s_time if m != -2 else -2)
+            ]
 
 
 def gather_results():
