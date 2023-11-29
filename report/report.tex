@@ -129,10 +129,9 @@ For problem N, we solved it by doing a BFS while avoiding to queue any red verti
 to find the shortest path which is what we are trying to achieve here.
 The runtime of BFS is O(V*E) where V are the number of vertices and E is the number of edges.
 
-For problem S, we used the answer from problem M. Since problem M returns the maximum number of red nodes on a path from s to t we know that if this is > 0, we have
-to return True and otherwise False for problem S. Thus, the Some problem reduces to the Many problem.
-For that reason the runtime is the same as for problem M. Moreover, since Many is NP-hard and Some reduces to Many then Some is also NP-hard and can't be solved for
-undirected graphs and graphs with cycles.
+For problem S, we partly depend on the answers from Many and Few, since if the graph is directed then we can reduce it to Many. If any of the answers to these are > 0, then we can safely return true for Some. Also if the answer to Many is 0 then we can return false. After these checks, we make sure that the
+graph does not contain a cycle, since else it reduces to the  and thus it is NP-hard. We run DFS to find a path from start to target. The DFS is implemented such that it counts the number of red vertices on the path we're currently exploring. Since DFS finds all paths, then it must find a path with one or more red vertices from start to target if there exists such a path. 
+The runtime for DFS is O(V+E) where V are the number of vertices and E is the number of edges. 
 
 \subsection{Appendix}
 \textbf{All results}
