@@ -35,12 +35,8 @@ For the complete table of all results, see the tab-separated text file {\tt resu
 
 \subsection{Methods}
 
-For problem A, I solved each instance $G$ by $\cdots$\footnote{Describe what you did.
-  Use words like ``building a inverse anti-tree without self-loops where each vertex in $G$ is presented by a Strogatz--Wasserman shtump.
-  I then performed a standard longest hash sorting using the algorithm of Bronf (Algorithm 5 in [1]).''
-  Be neat, brief, and precise.}
-The running time of this algorithm is $\cdot$, and my implementation spends $\cdots$ seconds on the instance $\cdots$ with  $n=\cdots$.
-
+For problem A, we've used a modified version of the BFS algorihtm to find an alternating path from $s$ to $t$. Depending on the color of the start vertex the algorithm chooses edges that leads to a different color than the current and discards edges that leads to a vertex with the same color. If none of the adjacent vertices has another color, the algorithm will try to explore some of the other vertices that has been queued until none is left. At this point the algorihtm will return 'false'. In the case where the algorithm finds the alternating path it returns 'true'.
+The running time of this algorithm is O(V+E).
 I solved problem $\cdots$ for all $\cdots$\footnote{For instance, “planar, bipartite”} graphs using $\cdots$.
 
 I was unable to solve problem $\cdots$ except for the $\cdots$ instances.
