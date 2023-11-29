@@ -116,4 +116,3 @@ if __name__ == '__main__':
         print(f"Man:\t{res[4]}")
         print(f"Non:\t{res[5]}")
         print(f"Som:\t{res[6]}")
-        print(f"Som:\t{res[6]}")
