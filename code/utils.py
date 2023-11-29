@@ -70,5 +70,5 @@ def write_results(results):
     write_txt_results(results)
     write_tex_results(results)
 
-    smallResults = [res for res in results if int(res[1]) <= 500]
-    write_tex_results(smallResults, filename='results-small')
+    smallResults = [res for res in results if int(res[1]) >= 500]
+    write_tex_results(smallResults, filename='results-large')
