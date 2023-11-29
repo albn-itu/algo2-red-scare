@@ -41,9 +41,10 @@ def many(graph):
 
         if contains_path_to_target:
             return longest_chain(graph, sorted_nodes)
+        else:
+            return -1
 
     return -2
-
 
 def alternate(graph):
     parent = alternating_bfs(graph)
