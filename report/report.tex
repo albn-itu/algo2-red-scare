@@ -121,7 +121,7 @@ For the complete table of all results, including time, see the tab-separated tex
 
 \subsection{Methods}
 For problem A, we've used a modified version of the BFS algorithm to find an alternating path from $s$ to $t$. Depending on the color of the start vertex the algorithm queues edges that leads to a different color than the current and discards edges that leads to a vertex with the same color. In the case where the queue of alternating vertices are empty without finding an alternating path to the end vertex, the algorithm will return 'false'. However, in the case where it finds the end vertex with a different color than the current visited vertex, the algorithm will return 'true'.
-Looking at the running time of this algorithm it is O(V+E), the same as Breath-First Search (BFS).
+Looking at the running time of this algorithm it is O(V+E), the same as Breadth-First Search (BFS).
 
 For problem F we've solved each instance with Dijkstra's algorithm to find the path containing the fewest amount of red vertices. We've achieved this by assigning each edge entering a red vertex a weight of 1. Every other edge is assigned a weight of 0. Thereby the path with the smallest cost to get from $s$ to $t$ must be the one that enters the fewest red vertices. Since Dijkstra only allows simple paths, the cost of the path must also be the total amount of red vertices that the path enters. Therefore the cost to get to $t$ is the total red vertices the path enters. In case there is no path from $s$ to $t$ the cost to get to $t$ will be $sys.maxsize$. The running time of Dijkstra is O(E + V log V) where E is the number of edges and V is the number of vertices.
 
