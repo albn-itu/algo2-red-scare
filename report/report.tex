@@ -35,21 +35,6 @@ For the complete table of all results, see the tab-separated text file {\tt resu
 
 \subsection{Methods}
 
-For problem A, I solved each instance $G$ by $\cdots$\footnote{Describe what you did.
-  Use words like ``building a inverse anti-tree without self-loops where each vertex in $G$ is presented by a Strogatz--Wasserman shtump.
-  I then performed a standard longest hash sorting using the algorithm of Bronf (Algorithm 5 in [1]).''
-  Be neat, brief, and precise.}
-The running time of this algorithm is $\cdot$, and my implementation spends $\cdots$ seconds on the instance $\cdots$ with  $n=\cdots$.
-
-I solved problem $\cdots$ for all $\cdots$\footnote{For instance, “planar, bipartite”} graphs using $\cdots$.
-
-I was unable to solve problem $\cdots$ except for the $\cdots$ instances.
-This is because, in generality, this problem is $\cdots$. 
-To see this, consider the following reduction from $\cdots$.
-Let $\ldots$ 
-
-I was also unable to solve $\cdots$ for $\cdots$, but I don’t know why.\footnote{Remove or expand as necessary.}
-
 For problem F we've solved each instance with Dijkstra's algorithm to find the path containing the fewest amount of red vertices. We've achieved this by assigning each edge entering a red vertex a weight of 1. Every other edge is assigned a vertex of 0. Thereby the path with the smallest cost to get from $s$ to $t$ must be the one that enters the fewest red vertices. Since Dijkstra only allows simple paths, the cost of the path must also be the total amount of red vertices that the path enters. Therefore the cost to get to $t$ is the total red vertices the path enters. In case there is no path from $s$ to $t$ the cost to get to $t$ will be $sys.maxsize$.
 
 For problem M, we first check that the graph is directed and contains no cycles. This is because the problem can’t be solved if there is a cycle and for undirected graphs. Thus the problem is NP-hard. On the other hand, if the graph is directed and with no cycles we compute a topological sorting starting from the start node. That is, any nodes pointing to the start node will not
@@ -66,13 +51,6 @@ For problem S, we used the answer from problem M. Since problem M returns the ma
 to return True and otherwise False for problem S. Thus, the Some problem reduces to the Many problem.
 For that reason the runtime is the same as for problem M. Moreover, since Many is NP-hard and Some reduces to Many then Some is also NP-hard and can't be solved for
 undirected graphs and graphs with cycles.
-
-\subsection{References}
-\begin{description}
-  \item[1.] \emph{APLgraphlib---A library for Basic Graph Algorithms in APL}, version 2.11, 2016, Iverson Project, {\tt github.com/iverson/APLgraphlib}.\sidenote{If you use references to code, books, or papers, be professional about it. Use whatever style you want, but be consistent.}
-
-  \item[2.] A. Lovelace, \emph{Algorithms and Data Structures in Pascal}, Addison--Wesley 1881. 
-\end{description}
 
 \end{document}
 
