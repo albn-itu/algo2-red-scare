@@ -2,10 +2,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
 \usepackage{amsmath}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{adjustbox}
 
 \usepackage{color}
 \newcommand{\red}[1]{{\color{red} #1}}
 \usepackage{booktabs}
+
 \begin{document}
 \section{Red Scare! Report}
 
@@ -16,22 +20,96 @@ by Andreas Tietgen (anti), Albert Rise Nielsen (albn) and Amalie Bøgild Sørens
 The following table gives our results for all graphs of at least 500 vertices.
 
 \medskip
-\begin{tabular}{lrrrrrr}
-  \toprule
-  Instance name & $n$ & A & F & M & N & S \\
-  \midrule
-  rusty-5762 & 5,762 & true & 16 & -- & ? & 5 \\
-  wall-p-10000 & 10,000 &\\	
-  $\vdots$\\
-  \bottomrule
-\end{tabular}
+\begin{longtable}{lrrrrrr}
+\toprule
+	Instance name & $n$ & A & F & M & N & S\\
+	\midrule
+	G-ex & 8 & true & 0 & ?! & 3 & ?!\\
+	P3 & 3 & true & 1 & ?! & -1 & true\\
+	common-1-100 & 100 & false & -1 & ?! & -1 & ?!\\
+	common-1-20 & 20 & false & -1 & -1 & -1 & false\\
+	common-1-250 & 250 & false & -1 & ?! & -1 & ?!\\
+	common-1-50 & 50 & false & -1 & ?! & -1 & ?!\\
+	common-1-500 & 500 & false & -1 & ?! & -1 & ?!\\
+	common-2-100 & 100 & false & -1 & ?! & -1 & ?!\\
+	common-2-20 & 20 & false & -1 & ?! & -1 & ?!\\
+	common-2-250 & 250 & false & -1 & ?! & -1 & ?!\\
+	common-2-50 & 50 & false & -1 & ?! & -1 & ?!\\
+	common-2-500 & 500 & true & 1 & ?! & 4 & true\\
+	dodecahedron & 20 & false & 1 & ?! & 1 & true\\
+	gnm-10-15-0 & 10 & false & 0 & ?! & 1 & ?!\\
+	gnm-10-15-1 & 10 & true & 0 & ?! & 1 & ?!\\
+	gnm-10-20-0 & 10 & false & 0 & ?! & 3 & ?!\\
+	gnm-10-20-1 & 10 & true & 1 & ?! & 3 & true\\
+	grid-10-0 & 100 & false & 0 & ?! & 49 & ?!\\
+	grid-10-1 & 100 & false & 0 & ?! & 29 & ?!\\
+	grid-10-2 & 100 & true & 2 & ?! & -1 & true\\
+	grid-5-0 & 25 & true & 0 & ?! & 14 & ?!\\
+	grid-5-1 & 25 & true & 0 & ?! & 8 & ?!\\
+	grid-5-2 & 25 & true & 1 & ?! & -1 & true\\
+	increase-n10-1 & 10 & true & 1 & 1 & 1 & true\\
+	increase-n10-2 & 10 & true & 1 & 2 & 1 & true\\
+	increase-n10-3 & 10 & false & -1 & -1 & -1 & false\\
+	increase-n100-1 & 100 & false & -1 & -1 & -1 & false\\
+	increase-n100-2 & 100 & true & 1 & 12 & 1 & true\\
+	increase-n100-3 & 100 & false & -1 & -1 & -1 & false\\
+	increase-n20-1 & 20 & false & -1 & -1 & -1 & false\\
+	increase-n20-2 & 20 & true & 0 & 5 & 1 & true\\
+	increase-n20-3 & 20 & false & -1 & -1 & -1 & false\\
+	increase-n50-1 & 50 & false & -1 & -1 & -1 & false\\
+	increase-n50-2 & 50 & true & 1 & 4 & 1 & true\\
+	increase-n50-3 & 50 & true & 1 & 3 & 1 & true\\
+	increase-n500-1 & 500 & true & 1 & 15 & 1 & true\\
+	increase-n500-2 & 500 & true & 1 & 16 & 1 & true\\
+	increase-n500-3 & 500 & true & 1 & 15 & 1 & true\\
+	increase-n8-1 & 8 & true & 1 & 1 & 1 & true\\
+	increase-n8-2 & 8 & true & 0 & 1 & 1 & true\\
+	increase-n8-3 & 8 & true & 0 & 1 & 1 & true\\
+	rusty-1-17 & 17 & false & 0 & ?! & 10 & ?!\\
+	ski-illustration & 36 & false & 0 & 1 & 8 & true\\
+	ski-level10-1 & 79 & false & -1 & -1 & -1 & false\\
+	ski-level10-2 & 76 & false & 1 & 4 & -1 & true\\
+	ski-level10-3 & 77 & false & 4 & 7 & -1 & true\\
+	ski-level20-1 & 252 & false & 3 & 10 & -1 & true\\
+	ski-level20-2 & 253 & false & 9 & 13 & -1 & true\\
+	ski-level20-3 & 254 & false & -1 & -1 & -1 & false\\
+	ski-level3-1 & 16 & true & 0 & 3 & 5 & true\\
+	ski-level3-2 & 14 & false & 0 & 1 & 5 & true\\
+	ski-level3-3 & 15 & false & 0 & 1 & 5 & true\\
+	ski-level5-1 & 29 & false & 1 & 3 & -1 & true\\
+	ski-level5-2 & 26 & false & 1 & 2 & -1 & true\\
+	ski-level5-3 & 27 & false & 0 & 0 & 7 & false\\
+	smallworld-10-0 & 100 & false & 0 & ?! & 6 & ?!\\
+	smallworld-10-1 & 100 & true & 0 & ?! & 8 & ?!\\
+	smallworld-20-0 & 400 & false & 0 & ?! & 8 & ?!\\
+	smallworld-20-1 & 400 & true & 0 & ?! & 14 & ?!\\
+	smallworld-3-0 & 9 & false & 0 & ?! & 4 & ?!\\
+	smallworld-3-1 & 9 & false & 1 & ?! & 2 & true\\
+	wall-n-1 & 8 & false & 0 & ?! & 1 & ?!\\
+	wall-n-10 & 80 & false & 0 & ?! & 1 & ?!\\
+	wall-n-2 & 16 & false & 0 & ?! & 1 & ?!\\
+	wall-n-3 & 24 & false & 0 & ?! & 1 & ?!\\
+	wall-n-4 & 32 & false & 0 & ?! & 1 & ?!\\
+	wall-p-1 & 8 & false & 0 & ?! & 1 & ?!\\
+	wall-p-10 & 62 & false & 0 & ?! & 1 & ?!\\
+	wall-p-2 & 14 & false & 0 & ?! & 1 & ?!\\
+	wall-p-3 & 20 & false & 0 & ?! & 1 & ?!\\
+	wall-p-4 & 26 & false & 0 & ?! & 1 & ?!\\
+	wall-z-1 & 8 & false & 0 & ?! & 1 & ?!\\
+	wall-z-10 & 71 & false & 0 & ?! & 1 & ?!\\
+	wall-z-2 & 15 & false & 0 & ?! & 1 & ?!\\
+	wall-z-3 & 22 & false & 0 & ?! & 1 & ?!\\
+	wall-z-4 & 29 & false & 0 & ?! & 1 & ?!\\
+
+	\bottomrule
+\end{longtable}
 \medskip
 
 The columns are for the problems Alternate, Few, Many, None, and Some.
 The table entries either give the answer, or contain `?' for those cases where we were unable to find a solution within reasonable time.
 For those questions where there is a reason for our inability to find a good algorithm (because the problem is hard), we wrote `?!'.
 
-For the complete table of all results, see the tab-separated text file {\tt results.txt}.
+For the complete table of all results, including time, see the tab-separated text file {\tt results.txt} or the appendix.
 
 \subsection{Methods}
 
@@ -68,6 +146,10 @@ For that reason the runtime is the same as for problem M.
 
   \item[2.] A. Lovelace, \emph{Algorithms and Data Structures in Pascal}, Addison--Wesley 1881. 
 \end{description}
+
+\subsection{Appendix}
+\textbf{All results}
+\input{results.tex}
 
 \end{document}
 
