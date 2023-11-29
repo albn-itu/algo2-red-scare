@@ -42,6 +42,9 @@ For problem M, we first check that the graph is directed and contains no cycles.
 such that we can pop from the sorting in order to obtain the first node in the topological sorting. When returning from the topological sorting, we also check whether the target node is in visited, since then we know that there exists a path from start to target. If this is not the case we can safely return
  -1. If there is a path going from start to end vertex, we can run the longest chain algorithm in order to find the path containing the most red vertices: We pop from the topological sorting and define ‘a’ as 1 if this node is red, otherwise 0. We then visit all neighbours and update their entry in the dist array: if the distance to our current node + a is bigger
  than what is currently stored, we set the dist to exactly the distance to our current node + a. In this way we make sure that we get the chain with the most red vertices. Furthermore, we use memoization as we save the current computed dist to all vertices and reuse this in other compuations. At last, we return the dist stored for the target node, which is the maximum number of red vertices on any path from start to target. The runtime of M is O(V+E) where V are the vertices and E are the edges.
+ 
+As stated we could not solve the problem in the instances where the graph is undirected or contains a cycle. This is due to the problem, being NP-Hard, as can be seen by the following reduction from the Longest Path Problem:
+In order to see this consider a graph $G(V,E)$. The longest path algorithm can be reduced to the Many problem by setting all verticies, $$V(G)$$ to be red. By the nature of the Many problem the output would be a path with the most red vertices, which is the same as the longest path. 
 
 For problem N, we solved it by doing a BFS while avoiding to queue any red vertices unless it is the target node. BFS is guaranteed
 to find the shortest path which is what we are trying to achieve here.
